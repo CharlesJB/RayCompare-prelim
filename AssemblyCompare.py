@@ -93,12 +93,12 @@ class KmerParser:
 	def _printColor(self, colorValue):
 		toPrint = ""
 		fileCount = len(self.m_fileList)
-		for i in range(0, fileCount):
-			if (colorValue / (fileCount - i) % 2) == 0:
+		for i in range(1, fileCount + 1):
+			if (colorValue / (10**(fileCount - i)) % 2) == 0:
 				toPrint = toPrint + "0"
 			else:
 				toPrint = toPrint + "1"
-			if i != (fileCount - 1):
+			if i != (fileCount):
 				toPrint = toPrint + "-"
 		return toPrint
 
