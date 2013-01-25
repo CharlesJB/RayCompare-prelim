@@ -53,12 +53,19 @@ class KmerParser:
 	def _parseFile(self, filename):
 		currentFilenameColorValue = self._convertFilenameToColorValue(filename)
 		entrySequence = ""
+		nucleotideCount = 0
 		for line in open(filename):
 			if line[0] == '>':
 				self._kmerizeSequence(entrySequence.lower(), currentFilenameColorValue)
 				entrySequence = ""
 			else:
 				entrySequence = entrySequence + line.strip()
+				nucleotideCount += len(line.strip())
+				if nucleotideCount > 1000: # To avoid using too much memory when parsing a sequence, we kmerize it once in a while
+					self._kmerizeSequence(entrySequence.lower(), currentFilenameColorValue)
+					# We keep what we know for now about the next k-mer
+					entrySequence = entrySequence[len(entrySequence)-self.m_kmerLength]
+					nucleotideCount = len(entrySequence)
 		self._kmerizeSequence(entrySequence.lower(), currentFilenameColorValue)
 
 	def _kmerizeSequence(self, sequence, currentFilenameColorValue):
