@@ -64,7 +64,7 @@ class KmerParser:
 				if nucleotideCount > 1000: # To avoid using too much memory when parsing a sequence, we kmerize it once in a while
 					self._kmerizeSequence(entrySequence.lower(), currentFilenameColorValue)
 					# We keep what we know for now about the next k-mer
-					entrySequence = entrySequence[len(entrySequence)-self.m_kmerLength]
+					entrySequence = entrySequence[len(entrySequence)-self.m_kmerLength+1]
 					nucleotideCount = len(entrySequence)
 		self._kmerizeSequence(entrySequence.lower(), currentFilenameColorValue)
 
