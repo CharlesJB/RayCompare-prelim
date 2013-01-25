@@ -94,8 +94,9 @@ class KmerParser:
 
 	def _updateVirtualColor(self, filenameColorValue, lastColorValue = 0):
 		newValue = lastColorValue
-		if ((lastColorValue / filenameColorValue) % 2) == 0:
-			newValue = lastColorValue + filenameColorValue
+		if filenameColorValue != 0:
+			if ((lastColorValue / filenameColorValue) % 2) == 0:
+				newValue = lastColorValue + filenameColorValue
 		return newValue
 
 	def _printColor(self, colorValue):
